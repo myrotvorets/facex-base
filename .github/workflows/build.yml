@@ -20,9 +20,10 @@ jobs:
       uses: actions/setup-node@v2.1.1
       with:
         node-version: ${{ matrix.node_version }}
+        registry-url: https://npm.pkg.github.com
 
-    - name: Install dependencies and run tests
-      run: npm cit
-
-    - name: Build
-      run: npm run build
+    - run: rm -f .npmrc
+    - run: npm cit
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - run: npm run build

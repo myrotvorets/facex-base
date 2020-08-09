@@ -40,10 +40,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/myrotvorets/facex.git"
+    "url": "git+https://github.com/myrotvorets/facex-base.git"
   },
   "bugs": {
-    "url": "https://github.com/myrotvorets/facex/issues"
+    "url": "https://github.com/myrotvorets/facex-base/issues"
   },
-  "homepage": "https://github.com/myrotvorets/facex#readme"
+  "homepage": "https://github.com/myrotvorets/facex-base#readme"
 }
