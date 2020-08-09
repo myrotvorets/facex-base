@@ -22,7 +22,6 @@ jobs:
         node-version: ${{ matrix.node_version }}
         registry-url: https://npm.pkg.github.com
 
-    - run: rm -f .npmrc
     - run: npm cit
       env:
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
