@@ -4,6 +4,7 @@ import { IRemoteTransport } from '../interfaces';
 import { ClientBase } from '../clientbase';
 import { FaceXRequestBuilder } from '../request/builder';
 import { BadResponseError } from '../exceptions';
+import { fakeRequest } from './fakerequest';
 
 jest.mock('../request/builder');
 
@@ -26,23 +27,6 @@ class FakeTransport implements IRemoteTransport {
     }
 }
 
-const request = {
-    req_type: 0,
-    signature: '',
-    data: {
-        client_id: '',
-        reqID_clnt: '',
-        reqID_serv: '00000000-0000-0000-0000-000000000000',
-        datetime: '0000-00-00T00:00:00.000Z',
-        segment: '0',
-        foto: null,
-        ResultNumber: 0,
-        par1: 0,
-        par2: 0,
-        comment: '',
-    },
-};
-
 describe('ClientBase', () => {
     beforeEach(() => jest.clearAllMocks());
 
@@ -59,9 +43,9 @@ describe('ClientBase', () => {
 
         expect.assertions(4);
 
-        await client.rawRequest(request);
+        await client.rawRequest(fakeRequest);
         expect(mockRequestEncoder).toHaveBeenCalledTimes(1);
-        expect(mockRequestEncoder).toHaveBeenCalledWith(request);
+        expect(mockRequestEncoder).toHaveBeenCalledWith(fakeRequest);
         expect(FakeTransport_post).toHaveBeenCalledTimes(1);
         expect(FakeTransport_post).toHaveBeenCalledWith(new URL('http://example.com/'), '{}', {
             'Content-Type': 'text/json',
@@ -78,6 +62,6 @@ describe('ClientBase', () => {
         mockRequestEncoder.mockResolvedValue('{}');
         FakeTransport_post.mockResolvedValue(undefined);
 
-        return expect(client.rawRequest(request)).rejects.toThrow(BadResponseError);
+        return expect(client.rawRequest(fakeRequest)).rejects.toThrow(BadResponseError);
     });
 });

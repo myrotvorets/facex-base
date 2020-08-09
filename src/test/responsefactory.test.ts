@@ -30,47 +30,31 @@ const data: [number, string][] = [
     [209, 'DeleteStatus'],
 ];
 
+const fakeResponse = {
+    ans_type: 0,
+    signature: '',
+    data: {
+        client_id: '',
+        reqID_serv: '00000000-0000-0000-0000-000000000000',
+        reqID_clnt: '00000000-0000-0000-0000-000000000000',
+        datetime: '0000-00-00T00:00:00.000Z',
+        result_code: 0,
+        results_amount: 0,
+        id: '',
+        segment: '',
+        fotos: [],
+        comment: '',
+    },
+};
+
 describe('responseFactory', () => {
     it('should return a generic response for unknown reponse types', () => {
-        const response = {
-            ans_type: 0,
-            signature: '',
-            data: {
-                client_id: '',
-                reqID_serv: '00000000-0000-0000-0000-000000000000',
-                reqID_clnt: '00000000-0000-0000-0000-000000000000',
-                datetime: '0000-00-00T00:00:00.000Z',
-                result_code: 0,
-                results_amount: 0,
-                id: '',
-                segment: '',
-                fotos: [],
-                comment: '',
-            },
-        };
-
-        const actual = responseFactory(response);
+        const actual = responseFactory(fakeResponse);
         expect(actual.constructor.name).toBe('Response');
     });
 
     it.each(data)('should return specific response for known response type (%d => %s)', (type, name) => {
-        const response = {
-            ans_type: type,
-            signature: '',
-            data: {
-                client_id: '',
-                reqID_serv: '00000000-0000-0000-0000-000000000000',
-                reqID_clnt: '00000000-0000-0000-0000-000000000000',
-                datetime: '0000-00-00T00:00:00.000Z',
-                result_code: 0,
-                results_amount: 0,
-                id: '',
-                segment: '',
-                fotos: [],
-                comment: '',
-            },
-        };
-
+        const response = Object.assign({}, fakeResponse, { ans_type: type });
         const actual = responseFactory(response);
         expect(actual.constructor.name).toBe(name);
     });
