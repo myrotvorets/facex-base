@@ -9,7 +9,7 @@ export class ImageProcessorDefault implements IImageProcessor {
             const buffer = await streamToBuffer(stream);
             return buffer.toString('base64');
         } catch (e) {
-            return Promise.reject(new BadImageError((e as Error).message));
+            throw new BadImageError((e as Error).message);
         }
     }
 }
