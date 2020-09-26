@@ -3,9 +3,13 @@ import { IImageProcessor } from '../interfaces';
 import { BadImageError } from '../exceptions';
 
 export class ImageProcessorDefault implements IImageProcessor {
+    // eslint-disable-next-line class-methods-use-this
     public async process(stream: NodeJS.ReadableStream): Promise<string> {
-        return streamToBuffer(stream)
-            .then((buffer) => buffer.toString('base64'))
-            .catch((e: Error) => Promise.reject(new BadImageError(e.message)));
+        try {
+            const buffer = await streamToBuffer(stream);
+            return buffer.toString('base64');
+        } catch (e) {
+            return Promise.reject(new BadImageError((e as Error).message));
+        }
     }
 }

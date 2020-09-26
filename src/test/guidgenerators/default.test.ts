@@ -6,8 +6,13 @@ describe('DefaultGuidGenerator', () => {
         const iterations = 100;
         expect.assertions(iterations * 2);
 
-        for (let i = 0; i < iterations; ++i) {
-            const guid = await generator.generate();
+        const guids = await Promise.all(
+            Array(iterations)
+                .fill(0)
+                .map(() => generator.generate()),
+        );
+
+        for (const guid of guids) {
             const version = guid.substring(12 + 2, 13 + 2);
             const variant = guid.substring(16 + 3, 17 + 3);
 

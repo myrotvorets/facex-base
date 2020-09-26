@@ -1,7 +1,7 @@
 import { PhotoEntry, Response } from './response';
 
 export class Match {
-    private _e: PhotoEntry;
+    private readonly _e: PhotoEntry;
 
     public constructor(x: PhotoEntry) {
         this._e = x;
@@ -59,6 +59,7 @@ export class Match {
 export class MatchedFaces extends Response {
     private _idx = 0;
 
+    // eslint-disable-next-line class-methods-use-this
     public isCacheable(): boolean {
         return true;
     }

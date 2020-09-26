@@ -1,7 +1,7 @@
 import { ClientBase } from './clientbase';
 import { SvcClientRequestEncoder } from './encoders/svcclient';
 import { AdminCommands } from './request/commands';
-import { IRemoteTransport, IFaceXRequestBuilder } from './interfaces';
+import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
 import * as R from './responses';
 
 export class SvcClient extends ClientBase {
@@ -73,7 +73,7 @@ export class SvcClient extends ClientBase {
     }
 
     public async deleteFace(items: string[]): Promise<R.DeleteAck> {
-        const data = Buffer.from(items.join('\r\n') + '\r\n', 'binary').toString('base64');
+        const data = Buffer.from(`${items.join('\r\n')}\r\n`, 'binary').toString('base64');
         const builder = this._requestBuilder.reset(AdminCommands.DELETE_INIT).setPhotoData(data);
         return this._sendRequest(await builder.get());
     }

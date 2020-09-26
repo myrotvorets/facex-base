@@ -16,7 +16,7 @@ export class QuerySectorStatsResult extends Response {
 
     private _decodeList(encoded: string): void {
         const s = Buffer.from(encoded, 'base64').toString();
-        const decoded = s.split(/[\r\n]+/g).filter(Boolean);
+        const decoded = s.split(/[\r\n]+/gu).filter(Boolean);
         for (const item of decoded) {
             const parts = item.split('*', 2);
             if (parts.length === 2) {

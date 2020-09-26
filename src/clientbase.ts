@@ -2,7 +2,7 @@ import debug from 'debug';
 import { RawResponse, Response } from './responses';
 import { responseFactory } from './responsefactory';
 import { BadResponseError } from './exceptions';
-import { IRemoteTransport, FaceXRequest, IFaceXRequestBuilder, IFaceXRequestEncoder } from './interfaces';
+import { FaceXRequest, IFaceXRequestBuilder, IFaceXRequestEncoder, IRemoteTransport } from './interfaces';
 
 const dbg = debug('facex');
 const dbgll = debug('facex:ll');
@@ -10,7 +10,7 @@ const dbgll = debug('facex:ll');
 export class ClientBase {
     protected _url: URL;
     private _transport: IRemoteTransport;
-    private _encoder: IFaceXRequestEncoder;
+    private readonly _encoder: IFaceXRequestEncoder;
     protected _requestBuilder: IFaceXRequestBuilder;
 
     public constructor(
@@ -48,7 +48,7 @@ export class ClientBase {
 
         let body: RawResponse;
         try {
-            body = JSON.parse(text);
+            body = JSON.parse(text) as RawResponse;
         } catch (e) {
             throw new BadResponseError(text);
         }

@@ -26,6 +26,7 @@ export class SearchCompleted extends Response {
         return this._stats;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public isCacheable(): boolean {
         return true;
     }

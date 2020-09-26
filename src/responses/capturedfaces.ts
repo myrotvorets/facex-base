@@ -1,7 +1,7 @@
 import { PhotoEntry, Response } from './response';
 
 export class CapturedFace {
-    private _e: PhotoEntry;
+    private readonly _e: PhotoEntry;
 
     public constructor(x: PhotoEntry) {
         this._e = x;
@@ -36,6 +36,7 @@ export class CapturedFace {
 export class CapturedFaces extends Response {
     private _idx = 0;
 
+    // eslint-disable-next-line class-methods-use-this
     public isCacheable(): boolean {
         return true;
     }

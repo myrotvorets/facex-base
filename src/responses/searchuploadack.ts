@@ -1,4 +1,4 @@
-import { Response, RawResponse } from './response';
+import { RawResponse, Response } from './response';
 
 // ans_type = 33
 export class SearchUploadAck extends Response {
@@ -7,7 +7,7 @@ export class SearchUploadAck extends Response {
     public constructor(r: RawResponse) {
         super(r);
 
-        const matches = r.data.comment.match(/^AQ=(\d+)\/BQ=(\d+)\/CQ=(\d+)/);
+        const matches = /^AQ=(\d+)\/BQ=(\d+)\/CQ=(\d+)/u.exec(r.data.comment);
         if (matches) {
             this._queueStats = [parseInt(matches[1], 10), parseInt(matches[2], 10), parseInt(matches[3], 10)];
         }

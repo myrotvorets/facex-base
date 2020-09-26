@@ -1,7 +1,7 @@
 import { PhotoEntry, Response } from './response';
 
 export class ComparisonResult {
-    private _e: PhotoEntry;
+    private readonly _e: PhotoEntry;
 
     public constructor(x: PhotoEntry) {
         this._e = x;

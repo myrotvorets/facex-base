@@ -1,7 +1,7 @@
 import { RawResponse, Response } from './response';
 
 export class SectorEntry {
-    private _parts: [string, string, string, string, string, string];
+    private readonly _parts: [string, string, string, string, string, string];
 
     // [
     //     '799493',
@@ -22,10 +22,12 @@ export class SectorEntry {
         return `${this._parts[0]}*${this._parts[1]}`;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public get segment(): number {
         return -1;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public get bank(): number {
         return -1;
     }
@@ -39,7 +41,7 @@ export class SectorEntry {
     }
 
     public get name(): string {
-        return this._parts[2].replace(/^{|}#?$/g, '');
+        return this._parts[2].replace(/^{|}#?$/gu, '');
     }
 
     public get listId(): number {
@@ -65,7 +67,7 @@ export class SectorEntry {
 // ans_type = 193
 // result_code = -2: wrong guid
 export class QuerySectorStatus extends Response {
-    private _list: SectorEntry[] = [];
+    private readonly _list: SectorEntry[] = [];
 
     public constructor(r: RawResponse) {
         super(r);
@@ -77,7 +79,7 @@ export class QuerySectorStatus extends Response {
 
     private _decodeList(encoded: string): void {
         const s = Buffer.from(encoded, 'base64').toString('binary');
-        const decoded = s.split(/[\r\n]+/g).filter(Boolean);
+        const decoded = s.split(/[\r\n]+/gu).filter(Boolean);
         for (const item of decoded) {
             const parts = item.split('*', 6);
             if (parts.length === 6) {

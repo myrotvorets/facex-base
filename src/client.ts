@@ -1,7 +1,7 @@
 import { ClientBase } from './clientbase';
 import { ClientRequestEncoder } from './encoders/client';
 import { Commands } from './request/commands';
-import { IRemoteTransport, IFaceXRequestBuilder } from './interfaces';
+import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
 import * as R from './responses';
 
 export class Client extends ClientBase {

@@ -22,8 +22,9 @@ jest.mock('../encoders/client', () => {
 const FakeTransport_post = jest.fn();
 
 class FakeTransport implements IRemoteTransport {
+    // eslint-disable-next-line class-methods-use-this
     public post(url: URL, data: string, headers: Record<string, string>): Promise<string> {
-        return FakeTransport_post(url, data, headers);
+        return FakeTransport_post(url, data, headers) as Promise<string>;
     }
 }
 

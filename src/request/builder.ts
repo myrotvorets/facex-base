@@ -1,11 +1,11 @@
 import { createReadStream } from 'fs';
 import { BufferStream } from '@myrotvorets/buffer-stream';
-import { IGuidGenerator, FaceXRequest, IFaceXRequestBuilder, IImageProcessor } from '../interfaces';
+import { FaceXRequest, IFaceXRequestBuilder, IGuidGenerator, IImageProcessor } from '../interfaces';
 
 export class FaceXRequestBuilder implements IFaceXRequestBuilder {
-    private _clientId: string;
-    private _guidGenerator: IGuidGenerator;
-    private _imageProcessor: IImageProcessor;
+    private readonly _clientId: string;
+    private readonly _guidGenerator: IGuidGenerator;
+    private readonly _imageProcessor: IImageProcessor;
     private _request!: FaceXRequest;
 
     public constructor(clientId: string, guidGenerator: IGuidGenerator, imageProcessor: IImageProcessor) {

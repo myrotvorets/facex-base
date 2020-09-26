@@ -3,14 +3,14 @@ import { RawResponse, Response } from './response';
 // ans_type = 209
 // result_code: -2: unknown GUID
 export class DeleteStatus extends Response {
-    private _list: string[] | undefined;
+    private readonly _list: string[] | undefined;
 
     public constructor(r: RawResponse) {
         super(r);
 
         if (this.isSucceeded() && typeof r.data.fotos?.[0]?.foto === 'string') {
             const decoded = Buffer.from(r.data.fotos[0].foto, 'base64').toString('binary');
-            this._list = decoded.split(/[\r\n]+/).filter(Boolean);
+            this._list = decoded.split(/[\r\n]+/u).filter(Boolean);
         }
     }
 
