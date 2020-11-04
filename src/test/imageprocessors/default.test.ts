@@ -15,6 +15,6 @@ describe('ImageProcessorDefault', () => {
 
     it('should throw BadImageError on failure', () => {
         const stream = createReadStream(join(__dirname, 'this-file-does-not-exist'));
-        return expect(processor.process(stream)).rejects.toThrowError(BadImageError);
+        return expect(processor.process(stream)).rejects.toThrow(BadImageError);
     });
 });
