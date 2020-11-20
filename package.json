@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@myrotvorets/buffer-stream": "^1.2.0",
-    "debug": "^4.2.0"
+    "debug": "^4.3.1"
   },
   "repository": {
     "type": "git",
