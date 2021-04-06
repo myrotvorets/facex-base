@@ -41,7 +41,7 @@ export class SectorEntry {
     }
 
     public get name(): string {
-        return this._parts[2].replace(/^{|}#?$/gu, '');
+        return this._parts[2].replace(/^\{|\}#?$/gu, '');
     }
 
     public get listId(): number {
