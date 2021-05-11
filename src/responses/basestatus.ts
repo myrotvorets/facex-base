@@ -46,7 +46,7 @@ export class BaseStatus extends Response {
                 }
 
                 this._idx = 0;
-                return { value: (undefined as unknown) as SegmentStats, done: true };
+                return { value: undefined as unknown as SegmentStats, done: true };
             },
         };
     }

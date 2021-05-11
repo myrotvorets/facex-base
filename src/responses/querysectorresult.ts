@@ -60,7 +60,7 @@ export class QuerySectorResult extends Response {
                 }
 
                 this._idx = 0;
-                return { value: (undefined as unknown) as StoredFace, done: true };
+                return { value: undefined as unknown as StoredFace, done: true };
             },
         };
     }

@@ -43,7 +43,7 @@ export class CompareCompleted extends Response {
                 }
 
                 this._idx = 0;
-                return { value: (undefined as unknown) as ComparisonResult, done: true };
+                return { value: undefined as unknown as ComparisonResult, done: true };
             },
         };
     }
