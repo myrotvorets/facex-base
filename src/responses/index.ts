@@ -1,8 +1,7 @@
 /* istanbul ignore file */
 
 export * from './response';
-export * from './basestatus'; // ans_type = 8, FCR
-export * from './numberofrecords'; // ans_type = 8, FaceX
+export * from './basestatus'; // ans_type = 8
 export * from './startcompareack'; // ans_type = 16
 export * from './uploadcompareack'; // ans_type = 17
 export * from './comparecompleted'; // ans_type = 18

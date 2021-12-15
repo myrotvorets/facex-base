@@ -1,20 +1,19 @@
 import { RawResponse, Response } from './response';
 
+// 228311, 0e:e2:87, !1-0-975495-975501, 1-0, 14, D:\Face_DB\0E\E2\87\!1-0-975495-975501.jpg;create_time=23.08.2020 6:48:03;list=14/0E0000, 37aa324e-8335-4b03-a77f-ea570132942f
+type SectorEntryParts = [
+    id: string,
+    sector: string,
+    name: string,
+    intName: string,
+    list: string,
+    fname: string,
+    guid: string,
+];
 export class SectorEntry {
-    private readonly _parts: [string, string, string, string, string, string];
+    private readonly _parts: SectorEntryParts;
 
-    // [
-    //     '799493',
-    //     '00:00:3e',
-    //     '{12f690ae-1e3d-4736-a11a-f32577b4cfcf}',
-    //     '2878',
-    //     '27',
-    //     '{path:..27\\00\\00\\3e\\12f690ae-1e3d-4736-a11a-f32577b4cfcf\\{12f690ae-1e3d-4736-a11a-f32577b4cfcf}\\2878.jpg|create_date:2020-06-24 11:10:22|comment:!1-0-62-399768}'
-    // ]
-    // path:..27\\00\\00\\3e\\12f690ae-1e3d-4736-a11a-f32577b4cfcf\\{12f690ae-1e3d-4736-a11a-f32577b4cfcf}\\2878.jpg
-    // |create_date:2020-06-24 11:10:22
-    // |comment:!1-0-62-399768
-    public constructor(parts: [string, string, string, string, string, string]) {
+    public constructor(parts: SectorEntryParts) {
         this._parts = parts;
     }
 
@@ -22,41 +21,39 @@ export class SectorEntry {
         return `${this._parts[0]}*${this._parts[1]}`;
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    public get segment(): number {
-        return -1;
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    public get bank(): number {
-        return -1;
-    }
-
     public get id(): number {
-        return parseInt(this._parts[0], 10);
-    }
-
-    public get intName(): string {
-        return this._parts[3];
-    }
-
-    public get name(): string {
-        return this._parts[2].replace(/^\{|\}#?$/gu, '');
-    }
-
-    public get listId(): number {
-        return parseInt(this._parts[4], 10);
+        return +this._parts[0];
     }
 
     public get sector(): string {
         return this._parts[1];
     }
 
+    public get name(): string {
+        return this._parts[2];
+    }
+
+    public get intName(): string {
+        return this._parts[3];
+    }
+
+    public get list(): number {
+        return +this._parts[4];
+    }
+
+    public get filename(): string {
+        return `${this._parts[5]}`.split(';', 2)[0];
+    }
+
+    public get externalID(): string {
+        return this._parts[6];
+    }
+
     public get meta(): Record<string, string> {
-        const items = this._parts[5].split('|');
         const meta: Record<string, string> = {};
-        items.forEach((item: string) => {
-            const [key, value] = item.split(':').map((s) => s.trim());
+        const [, ...parts] = `${this._parts[5]}`.split(';');
+        parts.forEach((item: string) => {
+            const [key, value] = item.split('=', 2).map((s) => s.trim());
             meta[key] = value;
         });
 
@@ -81,9 +78,9 @@ export class QuerySectorStatus extends Response {
         const s = Buffer.from(encoded, 'base64').toString('binary');
         const decoded = s.split(/[\r\n]+/gu).filter(Boolean);
         for (const item of decoded) {
-            const parts = item.split('*', 6);
-            if (parts.length === 6) {
-                this._list.push(new SectorEntry(parts as [string, string, string, string, string, string]));
+            const parts = item.split('*', 7);
+            if (parts.length === 7) {
+                this._list.push(new SectorEntry(parts as SectorEntryParts));
             }
         }
     }

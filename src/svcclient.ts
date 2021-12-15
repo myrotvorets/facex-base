@@ -9,9 +9,9 @@ export class SvcClient extends ClientBase {
         super(url, transport, new SvcClientRequestEncoder(), requestBuilder);
     }
 
-    public async numberOfRecords(): Promise<R.NumberOfRecords> {
+    public async baseStatus(): Promise<R.BaseStatus> {
         const builder = this._requestBuilder.reset(AdminCommands.BASE_STATUS);
-        return this._sendRequest(await builder.get(), R.NumberOfRecords, AdminCommands.BASE_STATUS);
+        return this._sendRequest(await builder.get());
     }
 
     public async querySector(sector: string): Promise<R.QuerySectorAck> {

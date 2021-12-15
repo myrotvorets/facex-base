@@ -16,7 +16,7 @@ export class SearchCompleted extends Response {
         this._stats = r.data.fotos.map((item: PhotoEntry) => ({
             faceID: item.par1,
             count: item.par2,
-            confidence: item.par3,
+            confidence: +item.par3,
         }));
 
         Object.freeze(this._stats);

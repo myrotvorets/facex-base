@@ -1,7 +1,7 @@
 export interface PhotoEntry {
     par1: number;
     par2: number;
-    par3: number;
+    par3: number | string;
     foto: string | null;
     namef: string | null;
     namel: string | null;

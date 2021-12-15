@@ -7,16 +7,16 @@ export class StoredFace {
         this._e = x;
     }
 
-    public get number(): number {
+    public get id(): number {
         return this._e.par1;
     }
 
-    public get bank(): number {
+    public get list(): number {
         return this._e.par2;
     }
 
-    public get id(): number {
-        return this._e.par3;
+    public get externalID(): string {
+        return `${this._e.par3}`;
     }
 
     public get face(): string {
@@ -28,15 +28,35 @@ export class StoredFace {
     }
 
     public get intName(): string {
+        // Example: 1-0
         return typeof this._e.namef === 'string' ? this._e.namef : '';
     }
 
     public get name(): string {
-        return typeof this._e.namel === 'string' ? this._e.namel.slice(0, -2) : '';
+        // Example: !1-0-975495-975510
+        return typeof this._e.namel === 'string' ? this._e.namel : '';
     }
 
     public get path(): string {
-        return typeof this._e.path === 'string' ? this._e.path : '';
+        if (typeof this._e.path === 'string') {
+            const parts = this._e.path.split(';', 2);
+            return parts[0];
+        }
+
+        return '';
+    }
+
+    public get meta(): Record<string, string> {
+        const meta: Record<string, string> = {};
+        if (typeof this._e.path === 'string') {
+            const [, ...parts] = this._e.path.split(';');
+            parts.forEach((item: string) => {
+                const [key, value] = item.split('=', 2).map((s) => s.trim());
+                meta[key] = value;
+            });
+        }
+
+        return meta;
     }
 }
 

@@ -4,6 +4,8 @@ import { Commands } from './request/commands';
 import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
 import * as R from './responses';
 
+type PhotoType = Buffer | string | NodeJS.ReadableStream;
+
 export class Client extends ClientBase {
     public constructor(url: string, transport: IRemoteTransport, requestBuilder: IFaceXRequestBuilder) {
         super(url, transport, new ClientRequestEncoder(), requestBuilder);
@@ -15,7 +17,7 @@ export class Client extends ClientBase {
     }
 
     public async uploadPhotoForSearch(
-        photo: Buffer | string | NodeJS.ReadableStream,
+        photo: PhotoType,
         priority: 'A' | 'B' | 'C' = 'C',
         comment = '',
     ): Promise<R.SearchUploadAck | R.SearchUploadError> {

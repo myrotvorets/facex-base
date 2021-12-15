@@ -16,7 +16,7 @@ export class Match {
     }
 
     public get similarity(): number {
-        return this._e.par3;
+        return +this._e.par3;
     }
 
     public get nameF(): string {

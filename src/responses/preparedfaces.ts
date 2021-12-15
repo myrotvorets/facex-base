@@ -15,7 +15,7 @@ export class PreparedFace {
         return this._e.namef || '';
     }
 
-    public get orignName(): string {
+    public get origName(): string {
         return this._e.namel || '';
     }
 

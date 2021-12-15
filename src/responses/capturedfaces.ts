@@ -16,11 +16,11 @@ export class CapturedFace {
     }
 
     public get maxSimilarity(): number {
-        return this._e.par3;
+        return +this._e.par3;
     }
 
     public get similarityRange(): [number, number] {
-        return [this._e.par2, this._e.par3];
+        return [this._e.par2, +this._e.par3];
     }
 
     public get face(): string {

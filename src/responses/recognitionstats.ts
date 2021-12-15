@@ -15,7 +15,7 @@ export class RecognitionStats extends Response {
     }
 
     public get maxSimilarity(): number {
-        return this._raw.data.fotos[0]?.par3 ?? 0;
+        return this._raw.data.fotos[0] ? +this._raw.data.fotos[0].par3 : 0;
     }
 
     // eslint-disable-next-line class-methods-use-this

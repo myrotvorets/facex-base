@@ -33,11 +33,7 @@ export class ClientBase {
         this._transport = transport;
     }
 
-    protected async _sendRequest<R extends Response>(
-        req: FaceXRequest,
-        ResponseClass?: typeof Response,
-        status?: number,
-    ): Promise<R> {
+    protected async _sendRequest<R extends Response>(req: FaceXRequest): Promise<R> {
         dbg(req);
         const encoded = await this._encoder.encode(req);
 
@@ -57,7 +53,7 @@ export class ClientBase {
             throw new BadResponseError(text);
         }
 
-        const ret = (ResponseClass && +body.ans_type === status ? new ResponseClass(body) : responseFactory(body)) as R;
+        const ret = responseFactory(body) as R;
         dbg(ret);
         return ret;
     }
