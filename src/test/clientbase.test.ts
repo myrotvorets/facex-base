@@ -1,4 +1,4 @@
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import { ClientRequestEncoder } from '../encoders/client';
 import { IRemoteTransport } from '../interfaces';
 import { ClientBase } from '../clientbase';
