@@ -1,6 +1,9 @@
 export class FaceXError extends Error {}
 export class BadImageError extends FaceXError {}
-export class NetworkError extends FaceXError {}
+
+export class NetworkError extends FaceXError {
+    public body = '';
+}
 
 export class HttpError extends FaceXError {
     public readonly code: number;
