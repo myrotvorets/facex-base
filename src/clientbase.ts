@@ -12,6 +12,7 @@ export class ClientBase {
     private _transport: IRemoteTransport;
     private readonly _encoder: IFaceXRequestEncoder;
     protected _requestBuilder: IFaceXRequestBuilder;
+    private _timeout = 15000;
 
     public constructor(
         url: string,
@@ -33,6 +34,14 @@ export class ClientBase {
         this._transport = transport;
     }
 
+    public get timeout(): number {
+        return this._timeout;
+    }
+
+    public set timeout(timeout: number) {
+        this._timeout = timeout;
+    }
+
     protected async _sendRequest<R extends Response>(req: FaceXRequest): Promise<R> {
         dbg(req);
         const encoded = await this._encoder.encode(req);
@@ -43,7 +52,7 @@ export class ClientBase {
         };
 
         dbgll('SEND:', encoded);
-        const text = await this._transport.post(this._url, encoded, headers);
+        const text = await this._transport.post(this._url, encoded, headers, this._timeout);
         dbgll('RECV:', text);
 
         let body: RawResponse;

@@ -18,7 +18,7 @@ export interface FaceXRequest {
 }
 
 export interface IRemoteTransport {
-    post(url: URL, data: string, headers: Record<string, string>): Promise<string>;
+    post(url: URL, data: string, headers: Record<string, string>, timeout?: number): Promise<string>;
 }
 
 export interface IFaceXRequestEncoder {
