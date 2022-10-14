@@ -33,7 +33,7 @@ describe('ClientBase', () => {
 
     it('constructs request and handles response properly', async () => {
         const transport = new FakeTransport();
-        const encoder = mocked<ClientRequestEncoder>(new ClientRequestEncoder(), true);
+        const encoder = mocked<ClientRequestEncoder>(new ClientRequestEncoder(), { shallow: true });
         const builder = new mockedRequestBuilder();
         const client = new ClientBase('http://example.com/', transport, encoder, builder);
 
@@ -56,7 +56,7 @@ describe('ClientBase', () => {
 
     it('throws BadResponseError on bad JSON', () => {
         const transport = new FakeTransport();
-        const encoder = mocked<ClientRequestEncoder>(new ClientRequestEncoder(), true);
+        const encoder = mocked<ClientRequestEncoder>(new ClientRequestEncoder(), { shallow: true });
         const builder = new mockedRequestBuilder();
         const client = new ClientBase('http://example.com/', transport, encoder, builder);
 
