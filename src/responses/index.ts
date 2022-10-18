@@ -27,3 +27,6 @@ export * from './preparedfaces'; // ans_type = 206
 export * from './addpreparedfacesack'; // ans_type = 207
 export * from './deleteack'; // ans_type = 208
 export * from './deletestatus'; // ans_type = 209
+export * from './videouploadack'; // ans_type = 241
+export * from './videostatus'; // ans_type = 243
+export * from './videoresult'; // ans_type = 245

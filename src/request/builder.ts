@@ -1,5 +1,5 @@
 import { createReadStream } from 'fs';
-import { BufferStream } from '@myrotvorets/buffer-stream';
+import { BufferStream, streamToBuffer } from '@myrotvorets/buffer-stream';
 import { FaceXRequest, IFaceXRequestBuilder, IGuidGenerator, IImageProcessor } from '../interfaces';
 
 export class FaceXRequestBuilder implements IFaceXRequestBuilder {
@@ -88,6 +88,20 @@ export class FaceXRequestBuilder implements IFaceXRequestBuilder {
         }
 
         this._request.data.foto = await this._imageProcessor.process(stream);
+        return this;
+    }
+
+    public async setVideo(s: Buffer | string | NodeJS.ReadableStream): Promise<this> {
+        let b: Buffer;
+        if (Buffer.isBuffer(s)) {
+            b = s;
+        } else if (typeof s === 'string') {
+            b = Buffer.from(s);
+        } else {
+            b = await streamToBuffer(s);
+        }
+
+        this._request.data.foto = b.toString('base64');
         return this;
     }
 

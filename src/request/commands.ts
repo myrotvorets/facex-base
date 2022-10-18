@@ -24,3 +24,9 @@ export const enum AdminCommands {
     DELETE_INIT = 208,
     DELETE_STATUS = 209,
 }
+
+export const enum VideoCommands {
+    VIDEO_UPLOAD = 240,
+    VIDEO_STATUS = 241,
+    VIDEO_RESULT = 242,
+}

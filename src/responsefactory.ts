@@ -42,6 +42,10 @@ const lookupTable: Record<number, typeof Response.Response> = {
 
     208: Response.DeleteAck,
     209: Response.DeleteStatus,
+
+    241: Response.VideoUploadAck,
+    243: Response.VideoStatus,
+    245: Response.VideoResult,
 };
 
 export function responseFactory(r: Response.RawResponse): Response.Response {

@@ -44,6 +44,7 @@ export interface IFaceXRequestBuilder {
     setSegment(segment: string): this;
     setPhotoData(s: string): this;
     setPhoto(s: Buffer | string | NodeJS.ReadableStream): Promise<this>;
+    setVideo(s: Buffer | string | NodeJS.ReadableStream): Promise<this>;
     setComment(comment: string): this;
     setResultNumber(resultNumber: number): this;
     setParams(par1: number, par2: number): this;
