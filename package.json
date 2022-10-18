@@ -1,6 +1,6 @@
 {
   "name": "@myrotvorets/facex-base",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "FaceX interface - base building blocks",
   "main": "dist/index.js",
   "scripts": {
