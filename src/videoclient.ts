@@ -1,6 +1,6 @@
 import { ClientBase } from './clientbase';
 import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
-import { SvcClientRequestEncoder } from './encoders/svcclient';
+import { ClientRequestEncoder } from './encoders/client';
 import { VideoCommands } from './request/commands';
 import * as R from './responses';
 
@@ -8,7 +8,7 @@ type VideoType = Buffer | string | NodeJS.ReadableStream;
 
 export class VideoClient extends ClientBase {
     public constructor(url: string, transport: IRemoteTransport, requestBuilder: IFaceXRequestBuilder) {
-        super(url, transport, new SvcClientRequestEncoder(), requestBuilder);
+        super(url, transport, new ClientRequestEncoder(), requestBuilder);
     }
 
     public async uploadVideo(video: VideoType): Promise<R.VideoUploadAck> {

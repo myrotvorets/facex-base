@@ -27,6 +27,6 @@ export const enum AdminCommands {
 
 export const enum VideoCommands {
     VIDEO_UPLOAD = 240,
-    VIDEO_STATUS = 241,
-    VIDEO_RESULT = 242,
+    VIDEO_STATUS = 242,
+    VIDEO_RESULT = 244,
 }
