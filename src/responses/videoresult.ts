@@ -14,6 +14,10 @@ export class VideoMatch {
     public get archiveAsBuffer(): Buffer {
         return Buffer.from(this._e.foto as string, 'base64');
     }
+
+    public get filename(): string {
+        return this._e.namef || '';
+    }
 }
 
 // ans_type = 245

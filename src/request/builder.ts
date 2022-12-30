@@ -26,7 +26,7 @@ export class FaceXRequestBuilder implements IFaceXRequestBuilder {
                 reqID_serv: serverRequestID,
                 datetime: new Date().toJSON(),
                 segment: '0',
-                foto: null,
+                foto: '',
                 ResultNumber: 0,
                 par1: 0,
                 par2: 0,
