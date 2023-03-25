@@ -11,8 +11,11 @@ export class VideoClient extends ClientBase {
         super(url, transport, new ClientRequestEncoder(), requestBuilder);
     }
 
-    public async uploadVideo(video: VideoType): Promise<R.VideoUploadAck> {
-        const builder = await this._requestBuilder.reset(VideoCommands.VIDEO_UPLOAD).setVideo(video);
+    public async uploadVideo(video: VideoType, priority: 'A' | 'B' | 'C' = 'C'): Promise<R.VideoUploadAck> {
+        const builder = await this._requestBuilder
+            .reset(VideoCommands.VIDEO_UPLOAD)
+            .setClientID(priority)
+            .setVideo(video);
         return this._sendRequest(await builder.get());
     }
 

@@ -86,4 +86,22 @@ export class Response {
     public isCacheable(): boolean {
         return false;
     }
+
+    protected static parseAttributes(s: string): Record<string, string> {
+        const result: Record<string, string> = {};
+        let idx = 0;
+
+        const pairs = s.split(';').filter(Boolean);
+        for (const pair of pairs) {
+            const parts = pair.split(':', 2);
+            if (parts.length === 2) {
+                result[parts[0].trim()] = parts[1].trim();
+            } else {
+                result[idx] = pair.trim();
+                ++idx;
+            }
+        }
+
+        return result;
+    }
 }
