@@ -27,6 +27,10 @@ export class VideoResult extends Response {
         return true;
     }
 
+    public isError(): boolean {
+        return this.resultCode < 0;
+    }
+
     public get archive(): VideoMatch | null {
         const { length } = this._raw.data.fotos;
         if (length === 0) {
