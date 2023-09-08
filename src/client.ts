@@ -20,11 +20,17 @@ export class Client extends ClientBase {
         photo: PhotoType,
         priority: 'A' | 'B' | 'C' = 'C',
         comment = '',
+        minSimialrity = 0,
     ): Promise<R.SearchUploadAck | R.SearchUploadError> {
+        if (minSimialrity < 0 || minSimialrity > 1000) {
+            minSimialrity = 0;
+        }
+
         const builder = await this._requestBuilder
             .reset(Commands.UPLOAD_SRCH)
             .setComment(comment)
             .setClientID(priority)
+            .setParams(minSimialrity, 0)
             .setPhoto(photo);
 
         return this._sendRequest(await builder.get());
