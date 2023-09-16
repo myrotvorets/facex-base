@@ -4,7 +4,8 @@ import { Commands } from './request/commands';
 import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
 import * as R from './responses';
 
-type PhotoType = Buffer | string | NodeJS.ReadableStream;
+export type PhotoType = Buffer | string | NodeJS.ReadableStream;
+export type PhotoUploadPriority = 'A' | 'B' | 'C';
 
 export class Client extends ClientBase {
     public constructor(url: string, transport: IRemoteTransport, requestBuilder: IFaceXRequestBuilder) {
@@ -18,7 +19,7 @@ export class Client extends ClientBase {
 
     public async uploadPhotoForSearch(
         photo: PhotoType,
-        priority: 'A' | 'B' | 'C' = 'C',
+        priority: PhotoUploadPriority = 'C',
         comment = '',
         minSimialrity = 0,
     ): Promise<R.SearchUploadAck | R.SearchUploadError> {
