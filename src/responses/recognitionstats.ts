@@ -18,8 +18,7 @@ export class RecognitionStats extends Response {
         return this._raw.data.fotos[0] ? +this._raw.data.fotos[0].par3 : 0;
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 }

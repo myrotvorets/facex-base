@@ -1,4 +1,4 @@
-import { PhotoEntry, RawResponse, Response } from './response';
+import { type PhotoEntry, type RawResponse, Response } from './response';
 
 export interface SearchStats {
     faceID: number;
@@ -26,8 +26,7 @@ export class SearchCompleted extends Response {
         return this._stats;
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 
@@ -36,7 +35,7 @@ export class SearchCompleted extends Response {
             next: (): IteratorResult<SearchStats, undefined> => {
                 if (this._idx < this._stats.length) {
                     return {
-                        value: this._stats[this._idx++],
+                        value: this._stats[this._idx++]!,
                         done: false,
                     };
                 }

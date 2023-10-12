@@ -1,6 +1,6 @@
 import { mocked } from 'jest-mock';
 import { ClientRequestEncoder } from '../encoders/client';
-import { IRemoteTransport } from '../interfaces';
+import type { IRemoteTransport } from '../interfaces';
 import { ClientBase } from '../clientbase';
 import { FaceXRequestBuilder } from '../request/builder';
 import { BadResponseError } from '../exceptions';
@@ -22,7 +22,6 @@ jest.mock('../encoders/client', () => {
 const FakeTransport_post = jest.fn();
 
 class FakeTransport implements IRemoteTransport {
-    // eslint-disable-next-line class-methods-use-this
     public post(url: URL, data: string, headers: Record<string, string>): Promise<string> {
         return FakeTransport_post(url, data, headers) as Promise<string>;
     }

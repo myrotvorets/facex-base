@@ -1,4 +1,4 @@
-import { RawResponse, Response } from './response';
+import { type RawResponse, Response } from './response';
 
 // ans_type = 209
 // result_code: -2: unknown GUID
@@ -8,7 +8,7 @@ export class DeleteStatus extends Response {
     public constructor(r: RawResponse) {
         super(r);
 
-        if (this.isSucceeded() && typeof r.data.fotos?.[0]?.foto === 'string') {
+        if (this.isSucceeded() && typeof r.data.fotos[0]?.foto === 'string') {
             const decoded = Buffer.from(r.data.fotos[0].foto, 'base64').toString('binary');
             this._list = decoded.split(/[\r\n]+/u).filter(Boolean);
         }
@@ -26,11 +26,11 @@ export class DeleteStatus extends Response {
         return this.resultCode === 3;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 
     public get list(): string[] {
-        return this._list || [];
+        return this._list ?? [];
     }
 }

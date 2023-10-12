@@ -9,7 +9,7 @@ export class VideoUploadAck extends Response {
 
         const matches = /^AQ=(\d+)\/BQ=(\d+)\/CQ=(\d+)/u.exec(r.data.comment);
         if (matches) {
-            this._queueStats = [parseInt(matches[1], 10), parseInt(matches[2], 10), parseInt(matches[3], 10)];
+            this._queueStats = [parseInt(matches[1]!, 10), parseInt(matches[2]!, 10), parseInt(matches[3]!, 10)];
         }
 
         Object.freeze(this._queueStats);
@@ -19,7 +19,7 @@ export class VideoUploadAck extends Response {
         return this._queueStats;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 }

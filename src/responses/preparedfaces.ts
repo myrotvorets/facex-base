@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class PreparedFace {
     private readonly _e: PhotoEntry;
@@ -12,19 +12,19 @@ export class PreparedFace {
     }
 
     public get intName(): string {
-        return this._e.namef || '';
+        return this._e.namef ?? '';
     }
 
     public get origName(): string {
-        return this._e.namel || '';
+        return this._e.namel ?? '';
     }
 
     public get face(): string {
-        return this._e.foto || '';
+        return this._e.foto ?? '';
     }
 
     public get faceAsBuffer(): Buffer {
-        return Buffer.from(this._e.foto || '', 'base64');
+        return Buffer.from(this._e.foto ?? '', 'base64');
     }
 }
 
@@ -36,7 +36,7 @@ export class PreparedFaces extends Response {
         return this.resultCode === 3;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 
@@ -47,9 +47,9 @@ export class PreparedFaces extends Response {
     public [Symbol.iterator](): Iterator<PreparedFace, undefined> {
         return {
             next: (): IteratorResult<PreparedFace, undefined> => {
-                if (this._raw.data.fotos && this._idx < this._raw.data.fotos.length) {
+                if (this._idx < this._raw.data.fotos.length) {
                     return {
-                        value: new PreparedFace(this._raw.data.fotos[this._idx++]),
+                        value: new PreparedFace(this._raw.data.fotos[this._idx++]!),
                         done: false,
                     };
                 }

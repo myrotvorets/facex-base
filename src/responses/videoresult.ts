@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class VideoMatch {
     private readonly _e: PhotoEntry;
@@ -8,26 +8,25 @@ export class VideoMatch {
     }
 
     public get archive(): string {
-        return this._e.foto as string;
+        return this._e.foto!;
     }
 
     public get archiveAsBuffer(): Buffer {
-        return Buffer.from(this._e.foto as string, 'base64');
+        return Buffer.from(this._e.foto!, 'base64');
     }
 
     public get filename(): string {
-        return this._e.namef || '';
+        return this._e.namef ?? '';
     }
 }
 
 // ans_type = 245
 export class VideoResult extends Response {
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 
@@ -41,6 +40,6 @@ export class VideoResult extends Response {
             console.warn(`VideoResult: ${length} matches found, only one expected`);
         }
 
-        return new VideoMatch(this._raw.data.fotos[0]);
+        return new VideoMatch(this._raw.data.fotos[0]!);
     }
 }

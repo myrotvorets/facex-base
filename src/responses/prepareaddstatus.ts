@@ -14,7 +14,7 @@ export class PrepareAddStatus extends Response {
         return this.resultCode === 3;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 

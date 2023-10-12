@@ -4,7 +4,7 @@ import { Response } from './response';
 export class VideoStatus extends Response {
     private _attributes: Record<string, string> | null = null;
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 
@@ -28,7 +28,7 @@ export class VideoStatus extends Response {
         if (this._attributes === null) {
             const attrs = Response.parseAttributes(this.comment);
             if (attrs[0]) {
-                attrs.status = attrs[0];
+                attrs['status'] = attrs[0];
                 delete attrs[0];
             }
 
