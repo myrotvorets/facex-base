@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class StoredFace {
     private readonly _e: PhotoEntry;
@@ -24,7 +24,7 @@ export class StoredFace {
     }
 
     public get faceAsBuffer(): Buffer {
-        return Buffer.from(this._e.foto || '', 'base64');
+        return Buffer.from(this._e.foto ?? '', 'base64');
     }
 
     public get intName(): string {
@@ -40,7 +40,7 @@ export class StoredFace {
     public get path(): string {
         if (typeof this._e.path === 'string') {
             const parts = this._e.path.split(';', 2);
-            return parts[0];
+            return parts[0]!;
         }
 
         return '';
@@ -52,7 +52,7 @@ export class StoredFace {
             const [, ...parts] = this._e.path.split(';');
             parts.forEach((item: string) => {
                 const [key, value] = item.split('=', 2).map((s) => s.trim());
-                meta[key] = value;
+                meta[key!] = value!;
             });
         }
 
@@ -64,8 +64,7 @@ export class StoredFace {
 export class QuerySectorResult extends Response {
     private _idx = 0;
 
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 
@@ -74,7 +73,7 @@ export class QuerySectorResult extends Response {
             next: (): IteratorResult<StoredFace> => {
                 if (this._idx < this._raw.data.fotos.length) {
                     return {
-                        value: new StoredFace(this._raw.data.fotos[this._idx++]),
+                        value: new StoredFace(this._raw.data.fotos[this._idx++]!),
                         done: false,
                     };
                 }

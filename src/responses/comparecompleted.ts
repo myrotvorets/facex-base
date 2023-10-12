@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class ComparisonResult {
     private readonly _e: PhotoEntry;
@@ -12,7 +12,7 @@ export class ComparisonResult {
     }
 
     public get name(): string {
-        return this._e.namef || '';
+        return this._e.namef ?? '';
     }
 }
 
@@ -20,7 +20,7 @@ export class ComparisonResult {
 export class CompareCompleted extends Response {
     private _idx = 0;
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 
@@ -28,7 +28,7 @@ export class CompareCompleted extends Response {
         return this.resultCode === 2;
     }
 
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return this.resultCode === 3 || this.resultCode === -7;
     }
 
@@ -37,7 +37,7 @@ export class CompareCompleted extends Response {
             next: (): IteratorResult<ComparisonResult> => {
                 if (this._idx < this._raw.data.fotos.length) {
                     return {
-                        value: new ComparisonResult(this._raw.data.fotos[this._idx++]),
+                        value: new ComparisonResult(this._raw.data.fotos[this._idx++]!),
                         done: false,
                     };
                 }

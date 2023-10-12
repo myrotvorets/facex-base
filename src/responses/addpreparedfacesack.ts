@@ -6,7 +6,7 @@ export class AddPreparedFacesAck extends Response {
         return this.resultCode === 2;
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 }

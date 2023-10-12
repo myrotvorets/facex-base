@@ -14,7 +14,7 @@ export class PrepareAddAck extends Response {
         return this.isAccepted();
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 }

@@ -1,4 +1,4 @@
-import { RawResponse, Response } from './response';
+import { type RawResponse, Response } from './response';
 
 // ans_type = 201
 // result_code = -2: wrong guid
@@ -8,8 +8,8 @@ export class QuerySectorStatsResult extends Response {
     public constructor(r: RawResponse) {
         super(r);
 
-        if (this.isSucceeded() && r.data.fotos.length > 0 && typeof r.data.fotos[0].foto === 'string') {
-            this._decodeList(r.data.fotos[0].foto);
+        if (this.isSucceeded() && r.data.fotos.length > 0 && typeof r.data.fotos[0]!.foto === 'string') {
+            this._decodeList(r.data.fotos[0]!.foto);
             Object.freeze(this._list);
         }
     }
@@ -20,14 +20,14 @@ export class QuerySectorStatsResult extends Response {
         for (const item of decoded) {
             const parts = item.split('*', 2);
             if (parts.length === 2) {
-                const sector = parts[0];
-                const count = parseInt(parts[1], 10);
+                const sector = parts[0]!;
+                const count = parseInt(parts[1]!, 10);
                 this._list[sector] = count;
             }
         }
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 

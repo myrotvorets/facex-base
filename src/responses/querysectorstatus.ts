@@ -42,7 +42,7 @@ export class SectorEntry {
     }
 
     public get filename(): string {
-        return `${this._parts[5]}`.split(';', 2)[0];
+        return `${this._parts[5]}`.split(';', 2)[0]!;
     }
 
     public get externalID(): string {
@@ -54,7 +54,7 @@ export class SectorEntry {
         const [, ...parts] = `${this._parts[5]}`.split(';');
         parts.forEach((item: string) => {
             const [key, value] = item.split('=', 2).map((s) => s.trim());
-            meta[key] = value;
+            meta[key!] = value!;
         });
 
         return meta;
@@ -69,8 +69,8 @@ export class QuerySectorStatus extends Response {
     public constructor(r: RawResponse) {
         super(r);
 
-        if (this.isSucceeded() && r.data.fotos.length > 0 && typeof r.data.fotos[0].foto === 'string') {
-            this._decodeList(r.data.fotos[0].foto);
+        if (this.isSucceeded() && r.data.fotos.length > 0 && typeof r.data.fotos[0]!.foto === 'string') {
+            this._decodeList(r.data.fotos[0]!.foto);
         }
     }
 
@@ -85,7 +85,7 @@ export class QuerySectorStatus extends Response {
         }
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 

@@ -10,7 +10,7 @@ export class QuerySectorAck extends Response {
         return this.isAccepted();
     }
 
-    public isError(): boolean {
+    public override isError(): boolean {
         return this.resultCode < 0;
     }
 }

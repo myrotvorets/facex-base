@@ -50,7 +50,7 @@ export class Response {
     }
 
     public get serverRequestID(): string {
-        return this._raw.data.reqID_serv || '';
+        return this._raw.data.reqID_serv ?? '';
     }
 
     public get clientRequestID(): string {
@@ -95,7 +95,7 @@ export class Response {
         for (const pair of pairs) {
             const parts = pair.split(':', 2);
             if (parts.length === 2) {
-                result[parts[0].trim()] = parts[1].trim();
+                result[parts[0]!.trim()] = parts[1]!.trim();
             } else {
                 result[idx] = pair.trim();
                 ++idx;

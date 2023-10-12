@@ -1,8 +1,8 @@
 import { ClientBase } from './clientbase';
 import { ClientRequestEncoder } from './encoders/client';
 import { Commands } from './request/commands';
-import { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
-import * as R from './responses';
+import type { IFaceXRequestBuilder, IRemoteTransport } from './interfaces';
+import type * as R from './responses';
 
 export type PhotoType = Buffer | string | NodeJS.ReadableStream;
 export type PhotoUploadPriority = 'A' | 'B' | 'C';

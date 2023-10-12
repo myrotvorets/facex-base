@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class Match {
     private readonly _e: PhotoEntry;
@@ -20,38 +20,38 @@ export class Match {
     }
 
     public get nameF(): string {
-        return this._e.namef as string;
+        return this._e.namef!;
     }
 
     public get nameL(): string {
-        return this._e.namel as string;
+        return this._e.namel!;
     }
 
     public get path(): string {
-        return this._e.path as string;
+        return this._e.path!;
     }
 
     public get pathParsed(): [string, number, number, string] {
-        const parts = (this._e.path as string).split('*', 4);
+        const parts = this._e.path!.split('*', 4);
 
         /*
          * Проверьте в команде 129 параметр path. Теперь он имеет вид:
          * сектор*номер_захваченного_лица*номер_результата_распознавания*полный_путь_к_ файлу_при_занесении_в_базу
          */
         return [
-            parts[0], // sector
-            parseInt(parts[1], 10), // number of the captured face
-            parseInt(parts[2], 10), // number of result
-            parts[3],
+            parts[0] ?? '', // sector
+            parseInt(parts[1] ?? '', 10), // number of the captured face
+            parseInt(parts[2] ?? '', 10), // number of result
+            parts[3] ?? '',
         ];
     }
 
     public get face(): string {
-        return this._e.foto as string;
+        return this._e.foto!;
     }
 
     public get faceAsBuffer(): Buffer {
-        return Buffer.from(this._e.foto as string, 'base64');
+        return Buffer.from(this._e.foto!, 'base64');
     }
 }
 
@@ -59,8 +59,7 @@ export class Match {
 export class MatchedFaces extends Response {
     private _idx = 0;
 
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 
@@ -69,7 +68,7 @@ export class MatchedFaces extends Response {
             next: (): IteratorResult<Match, undefined> => {
                 if (this._idx < this._raw.data.fotos.length) {
                     return {
-                        value: new Match(this._raw.data.fotos[this._idx++]),
+                        value: new Match(this._raw.data.fotos[this._idx++]!),
                         done: false,
                     };
                 }

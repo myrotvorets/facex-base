@@ -1,4 +1,4 @@
-import { PhotoEntry, Response } from './response';
+import { type PhotoEntry, Response } from './response';
 
 export class CapturedFace {
     private readonly _e: PhotoEntry;
@@ -24,11 +24,11 @@ export class CapturedFace {
     }
 
     public get face(): string {
-        return this._e.foto as string;
+        return this._e.foto!;
     }
 
     public get faceAsBuffer(): Buffer {
-        return Buffer.from(this._e.foto as string, 'base64');
+        return Buffer.from(this._e.foto!, 'base64');
     }
 }
 
@@ -36,8 +36,7 @@ export class CapturedFace {
 export class CapturedFaces extends Response {
     private _idx = 0;
 
-    // eslint-disable-next-line class-methods-use-this
-    public isCacheable(): boolean {
+    public override isCacheable(): boolean {
         return true;
     }
 
@@ -46,7 +45,7 @@ export class CapturedFaces extends Response {
             next: (): IteratorResult<CapturedFace, undefined> => {
                 if (this._idx < this._raw.data.fotos.length) {
                     return {
-                        value: new CapturedFace(this._raw.data.fotos[this._idx++]),
+                        value: new CapturedFace(this._raw.data.fotos[this._idx++]!),
                         done: false,
                     };
                 }
