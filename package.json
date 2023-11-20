@@ -31,7 +31,7 @@
     "jest-github-actions-reporter": "^1.0.3",
     "jest-mock": "^29.7.0",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "dependencies": {
     "@myrotvorets/buffer-stream": "^1.2.0",
