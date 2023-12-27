@@ -77,12 +77,12 @@ export class Response {
         return this._raw.data.comment;
     }
 
-    // eslint-disable-next-line class-methods-use-this
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     public isError(): boolean {
         return false;
     }
 
-    // eslint-disable-next-line class-methods-use-this
+    // eslint-disable-next-line @typescript-eslint/class-methods-use-this
     public isCacheable(): boolean {
         return false;
     }

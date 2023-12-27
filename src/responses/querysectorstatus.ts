@@ -42,6 +42,7 @@ export class SectorEntry {
     }
 
     public get filename(): string {
+        // eslint-disable-next-line @typescript-eslint/no-useless-template-literals
         return `${this._parts[5]}`.split(';', 2)[0]!;
     }
 
@@ -51,6 +52,7 @@ export class SectorEntry {
 
     public get meta(): Record<string, string> {
         const meta: Record<string, string> = {};
+        // eslint-disable-next-line @typescript-eslint/no-useless-template-literals
         const [, ...parts] = `${this._parts[5]}`.split(';');
         parts.forEach((item: string) => {
             const [key, value] = item.split('=', 2).map((s) => s.trim());
