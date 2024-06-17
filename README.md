@@ -1,6 +1,9 @@
 # facex-base
 
-[![DeepScan grade](https://deepscan.io/api/teams/13578/projects/16537/branches/358262/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=13578&pid=16537&bid=358262)
+[![Build and Test](https://github.com/myrotvorets/facex-base/actions/workflows/build.yml/badge.svg)](https://github.com/myrotvorets/facex-base/actions/workflows/build.yml)
+[![CodeQL Analysis](https://github.com/myrotvorets/facex-base/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/myrotvorets/facex-base/actions/workflows/codeql-analysis.yml)
+[![Dependency Review](https://github.com/myrotvorets/facex-base/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/myrotvorets/facex-base/actions/workflows/dependency-review.yml)
+[![Package Audit](https://github.com/myrotvorets/facex-base/actions/workflows/package-audit.yml/badge.svg)](https://github.com/myrotvorets/facex-base/actions/workflows/package-audit.yml)
 
 FaceX Interface: Base Building Blocks
 
