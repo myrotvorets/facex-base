@@ -40,7 +40,7 @@ jobs:
       packages: read
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        uses: step-security/harden-runner@382b675393c2c83a457a44e9bf5b129ec6995f38 # v1.2.0
         with:
           disable-sudo: true
           allowed-endpoints:
