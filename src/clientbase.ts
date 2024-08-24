@@ -59,7 +59,7 @@ export class ClientBase {
         try {
             body = JSON.parse(text) as RawResponse;
         } catch (e) {
-            throw new BadResponseError(text);
+            throw new BadResponseError(text, { cause: e });
         }
 
         const ret = responseFactory(body) as R;
