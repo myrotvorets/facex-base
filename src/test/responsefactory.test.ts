@@ -54,7 +54,7 @@ describe('responseFactory', () => {
     });
 
     it.each(data)('should return specific response for known response type (%d => %s)', (type, name) => {
-        const response = Object.assign({}, fakeResponse, { ans_type: type });
+        const response = { ...fakeResponse, ans_type: type };
         const actual = responseFactory(response);
         expect(actual.constructor.name).toBe(name);
     });
