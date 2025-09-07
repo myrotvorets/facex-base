@@ -49,7 +49,7 @@ const lookupTable: Record<number, typeof Response.Response> = {
 };
 
 export function responseFactory(r: Response.RawResponse): Response.Response {
-    const type = +r.ans_type;
+    const type = +r.ans_type; // eslint-disable-line @typescript-eslint/no-unnecessary-type-conversion
     const ctor = lookupTable[type];
 
     return ctor ? new ctor(r) : new Response.Response(r);
